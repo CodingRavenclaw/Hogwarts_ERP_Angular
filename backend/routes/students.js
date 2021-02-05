@@ -18,7 +18,7 @@ router.post('/students', function(req, res) {
   let arrInserts = [strFirstname, strLastname, intDataSet];
   aMasterAccessor.query(strSqlStatement, arrInserts, function (error, results, fields) {
     if (error) {
-      console.log("Fehler beim Ausführen des Statements! " + error);
+      console.log("Fehler beim Ausführen des Statements: " + error);
       return res.status(500).send("Fehler beim Laden der Schüler!");
     } else {
       return res.status(200).send({"data": results});
@@ -34,7 +34,7 @@ router.post('/totalnumberofstudents', function(req, res) {
   let arrInserts = [strFirstname, strLastname];
   aMasterAccessor.query(strSqlStatement, arrInserts, function (error, results, fields) {
     if (error) {
-      console.log("Fehler beim Ausführen des Statements! " + error);
+      console.log("Fehler beim Ausführen des Statements: " + error);
       return res.status(500).send("Fehler beim Laden der gesamten Schüleranzahl!");
     } else {
       return res.status(200).send({"data": results});
@@ -53,13 +53,12 @@ router.post('/editstudent', function(req, res) {
   let dateOfEnrollment = req.body.date_of_enrollment;
   let dateOfLeaving = req.body.date_of_leaving;
   let strDiploma = req.body.diploma;
-  console.log(strHouse);
   let strSqlStatement = "UPDATE hogwarts.student SET student.firstname = ?, student.lastname = ?, student.gender = ?, student.house = ?, student.bloodstatus = ?, student.birthday = ?, student.date_of_enrollment = ?, student.date_of_leaving = ?, student.diploma = ? WHERE student.studentId = ?";
   let arrInserts = [strFirstname, strLastname, strGender, strHouse, strBloodstatus, dateBirthday, dateOfEnrollment, dateOfLeaving, strDiploma, intStudentId];
   aMasterAccessor.query(strSqlStatement, arrInserts, function (error, results, fields) {
     if(error) {
-      console.log("Fehler beim Ausführen des Statements!" + error);
-      return res.status(500).send("Fehler beim Bearbeiten der Daten!" + error);
+      console.log("Fehler beim Ausführen des Statements: " + error);
+      return res.status(500).send("Fehler beim Bearbeiten der Daten: " + error);
     } else {
       console.log("Schüler erfolgreich bearbeitet!");
       return res.status(200);

@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { DbaccessstudentsService } from '../backendServices/dbaccessstudents.service';
 import { DbaccesshousesService } from '../backendServices/dbaccesshouses.service';
-import {DbaccessbloodstatusService} from "../backendServices/dbaccessbloodstatus.service";
+import { DbaccessbloodstatusService } from '../backendServices/dbaccessbloodstatus.service';
+import { DbaccessdiplomasService } from '../backendServices/dbaccessdiplomas.service';
 
 @Component({
   selector: 'app-editstudent',
@@ -15,6 +16,7 @@ export class EditstudentComponent implements OnInit {
   arrData: any[] = [];
   arrHouses: any[] = [];
   arrBloodstatus: any[] = [];
+  arrDiplomas: any[] = [];
   intStudentId = 0;
   strFirstname = '';
   strLastname = '';
@@ -29,7 +31,7 @@ export class EditstudentComponent implements OnInit {
   strDiploma = '';
 
   constructor(public modalRef: BsModalRef, private aDBAccessStudentsService: DbaccessstudentsService, private aDBAccessHousesService: DbaccesshousesService,
-              private aDBAccessBloodstatusService: DbaccessbloodstatusService) { }
+              private aDBAccessBloodstatusService: DbaccessbloodstatusService, private aDBAccessDiplomasService: DbaccessdiplomasService) { }
 
   ngOnInit(): void {
     this.intStudentId = this.arrData[0];
@@ -72,24 +74,20 @@ export class EditstudentComponent implements OnInit {
         }
       }
     }, (error: any) => {
-      console.log('Fehler beim Laden der Blutsstati: ' + error);
+      console.log('Fehler beim Laden der Blutsstati!');
     });
 
-    // ! Take a look for a dynamic solution!
     // Check diplomas
-    if (this.arrData[9] === 'ND') {
-      this.strDiploma = 'ND';
-    } else if (this.arrData[9] === 'OWL') {
-      this.strDiploma = 'OWL';
-    } else if (this.arrData[9] === 'NEWT') {
-      this.strDiploma = 'NEWT';
-    } else if (this.arrData[9] === 'NDY') {
-      this.strDiploma = 'NDY';
-    } else if (this.arrData[9] === 'SE') {
-      this.strDiploma = 'SE';
-    } else if (this.arrData[9] === 'E') {
-      this.strDiploma = 'E';
-    }
+    this.aDBAccessDiplomasService.getAllDiplomas().subscribe((res: any) => {
+      this.arrDiplomas = res.data;
+      for (const aDiploma of this.arrDiplomas) {
+        if (aDiploma.abbreviation === this.arrData[9]) {
+          this.strDiploma = aDiploma.abbreviation;
+        }
+      }
+    }, (error: any) => {
+      console.log('Fehler beim Laden der Abschlüsse!');
+    });
 
   }
 
@@ -104,12 +102,12 @@ export class EditstudentComponent implements OnInit {
   editStudent(): void {
     this.aDBAccessStudentsService.editStudent(this.intStudentId, this.strFirstname, this.strLastname, this.strGender,
       this.strHouse, this.strBloodstatus, this.dateBirthday, this.dateOfEnrollment, this.dateOfLeaving, this.strDiploma).subscribe((res: any) => {
-        this.modalRef.hide();
-        this.ngOnInit();
+        console.log(res);
     }, (error: any) => {
-        console.log('Fehler beim Bearbeiten des Schülers: ' + error);
+        console.log('Fehler beim Bearbeiten des Schülers!');
       }
     );
+    this.modalRef.hide();
   }
 
 }

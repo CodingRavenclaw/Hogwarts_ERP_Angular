@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const routeStudents = require('../backend/routes/students');
 const routeHouses = require('../backend/routes/houses');
 const routeBloodstatus = require('../backend/routes/bloodstatus');
+const routeDiplomas = require('../backend/routes/diplomas');
+
 const app = express();
 
 // Set headers
@@ -18,5 +20,6 @@ app.use(bodyParser.json());
 app.use(routeStudents);
 app.use(routeHouses);
 app.use(routeBloodstatus);
+app.use(routeDiplomas);
 
 app.listen(3000, () => console.log('Ich lausche auf den Port 3000! / I listen to the port 3000!'));
