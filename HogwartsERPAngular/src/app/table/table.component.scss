@@ -1,0 +1,17 @@
+#tblStudents {
+  th {
+    cursor: pointer;
+  }
+}
+
+pagination {
+
+  .page-item.active {
+    background-color: #e0ad14 !important;
+  }
+
+  .page-link {
+    background-color: #e0ad14 !important;
+  }
+
+}

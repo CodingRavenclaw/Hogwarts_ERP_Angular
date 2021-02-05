@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <div class="row my-4">
+    <div class="col-4">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="searchStudent" class="mx-2"> Schüler suchen: </label>
+          <input type="text" id="searchStudent" name="searchStudent" class="form-control mx-2">
+        </div>
+      </form>
+    </div>
+    <div class="col-4">
+
+    </div>
+    <div class="col-4 text-right">
+      <a class="btn btn-success" href="addStudent.html"> Schüler hinzufügen </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <pagination [totalItems]="intTotalNumberOfStudents" (pageChanged)="pageChanged($event)" [maxSize]="3" [previousText]="'Zurück'" [nextText]="'Weiter'"> </pagination>
+      <table class="table table-hover" id="tblStudents">
+        <thead id="tblHeadStudents">
+        <tr>
+          <th scope="col" id="thStudentId" (click)="orderByStudentId()">SchülerNr</th>
+          <th scope="col" id="thFirstname" (click)="orderByFirstname()">Vorname</th>
+          <th scope="col" id="thLastname" (click)="orderByLastname()">Nachname</th>
+          <th scope="col" id="thGender" (click)="orderByGender()">Geschlecht</th>
+          <th scope="col" id="thHouse" (click)="orderByHouse()">Haus</th>
+          <th scope="col" id="thBloodstatus" (click)="orderByBloodstatus()">Blutsstatus</th>
+          <th scope="col" id="thBirthday" (click)="orderByBirthday()">Geburtsdatum</th>
+          <th scope="col" id="thDateOfEnrollment" (click)="orderByDateOfEnrollment()">Einschulungsdatum</th>
+          <th scope="col" id="thDateOfLeaving" (click)="orderByDateOfLeaving()">Abgangsdatum</th>
+          <th scope="col" id="thDiploma" (click)="orderByDiploma()">Abschluss</th>
+          <th scope="col" class="text-center">Bearbeiten</th>
+          <th scope="col" class="text-center">Löschen</th>
+        </tr>
+        </thead>
+        <tbody id="tblBodyStudents" *ngFor="let aStudent of arrayStudents">
+          <tr>
+            <td> {{aStudent.studentId}} </td>
+            <td> {{aStudent.firstname}} </td>
+            <td> {{aStudent.lastname}} </td>
+            <td> {{aStudent.gender}} </td>
+            <td> {{aStudent.house}} </td>
+            <td> {{aStudent.bloodstatus}} </td>
+            <td> {{aStudent.birthday | date: 'dd.MM.yyyy'}} </td>
+            <td> {{aStudent.date_of_enrollment | date: 'dd.MM.yyyy'}} </td>
+            <td> {{aStudent.date_of_leaving | date: 'dd.MM.yyyy'}} </td>
+            <td> {{aStudent.diploma}} </td>
+            <td class="text-center"> <a class="btn btn-warning" (click)="editStudent(aStudent)"> Bearbeiten </a> </td>
+            <td class="text-center"> <a class="btn btn-danger"> Löschen </a> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+

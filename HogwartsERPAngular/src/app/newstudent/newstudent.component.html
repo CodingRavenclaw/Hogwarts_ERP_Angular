@@ -1,0 +1,95 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{strTitle}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+    <input type="hidden" id="studentId" name="studentId">
+    <div class="form-group">
+      <label for="firstName"> Vorname: </label> <br>
+      <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="strFirstname">
+    </div>
+    <div class="form-group">
+      <label for="lastName"> Nachname: </label> <br>
+      <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="strLastname">
+    </div>
+    <div class="form-group">
+      <label> Geschlecht: </label> <br>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="f" name="gender" value="f" [(ngModel)]="strGender">
+        <label class="form-check-label" for="f"> w </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="m" name="gender" value="m" [(ngModel)]="strGender">
+        <label class="form-check-label" for="m"> m </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="house"> Haus: </label>
+      <select class="form-control" id="house" name="house">
+        <option *ngFor="let aForLoopHouse of arrHouses">
+          {{aForLoopHouse.denotation}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label> Blutsstatus: </label> <br>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="halfblood" name="bloodStatus" value="HB" [(ngModel)]="strBloodstatus">
+        <label class="form-check-label" for="halfblood"> Halbblut </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="muggleborn" name="bloodStatus" value="MB" [(ngModel)]="strBloodstatus">
+        <label class="form-check-label" for="muggleborn"> Muggelstämmig </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="pureblood" name="bloodStatus" value="PB" [(ngModel)]="strBloodstatus">
+        <label class="form-check-label" for="pureblood"> Reinblütig </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="dateOfBirth"> Geburtstag: </label>
+      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="dateBirthday">
+    </div>
+    <div class="form-group">
+      <label for="dateOfEnrollment"> Einschulungsdatum: </label>
+      <input type="date" class="form-control" id="dateOfEnrollment" name="dateOfEnrollment" [(ngModel)]="dateOfEnrollment">
+    </div>
+    <div class="form-group">
+      <label for="dateOfLeaving"> Abgangsdatum: </label>
+      <input type="date" class="form-control" id="dateOfLeaving" name="dateOfLeaving" [(ngModel)]="dateOfLeaving">
+    </div>
+    <div class="form-group">
+      <label> Abschluss: </label> <br>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="ND" name="diploma" value="ND" [ngModel]="strDiploma">
+        <label class="form-check-label" for="ND"> Kein Abschluss </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="OWL" name="diploma" value="OWL" [ngModel]="strDiploma">
+        <label class="form-check-label" for="OWL"> Zauberer allgemeinen Grades </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="NEWT" name="diploma" value="NEWT" [ngModel]="strDiploma">
+        <label class="form-check-label" for="NEWT"> Unheimlich toller Zauberer </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="NDY" name="diploma" value="NDY" [ngModel]="strDiploma">
+        <label class="form-check-label" for="NDY"> Abschluss noch nicht erreicht </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="SE" name="diploma" value="SE" [ngModel]="strDiploma">
+        <label class="form-check-label" for="SE"> Schüleraustausch </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" class="form-check-input" id="E" name="diploma" value="E" [ngModel]="strDiploma">
+        <label class="form-check-label" for="E"> Schulverweis </label>
+      </div>
+    </div>
+    <div class="text-right">
+      <button class="btn btn-success" type="submit" (click)="addNewStudent()"> Schüler hinzufügen</button>
+    </div>
+  </form>
+</div>
