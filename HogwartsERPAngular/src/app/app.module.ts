@@ -12,9 +12,10 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { HttpClientModule } from '@angular/common/http';
 import { PageNotFoundComponent } from './errorhelpers/page-not-found/page-not-found.component';
-import { EditstudentComponent } from './editstudent/editstudent.component';
+import { EditstudentComponent } from './modalicComponents/editstudent/editstudent.component';
 import {FormsModule} from '@angular/forms';
 import { NewstudentComponent } from './newstudent/newstudent.component';
+import { AddstudentComponent } from './modalicComponents/addstudent/addstudent.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NewstudentComponent } from './newstudent/newstudent.component';
     NavbarComponent,
     PageNotFoundComponent,
     EditstudentComponent,
-    NewstudentComponent
+    NewstudentComponent,
+    AddstudentComponent
   ],
   imports: [
     BrowserModule,

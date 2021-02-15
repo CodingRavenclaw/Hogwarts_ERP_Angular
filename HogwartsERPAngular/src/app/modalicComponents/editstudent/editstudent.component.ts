@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { DbaccessstudentsService } from '../backendServices/dbaccessstudents.service';
-import { DbaccesshousesService } from '../backendServices/dbaccesshouses.service';
-import { DbaccessbloodstatusService } from '../backendServices/dbaccessbloodstatus.service';
-import { DbaccessdiplomasService } from '../backendServices/dbaccessdiplomas.service';
+import { DbaccessstudentsService } from '../../backendServices/dbaccessstudents.service';
+import { DbaccesshousesService } from '../../backendServices/dbaccesshouses.service';
+import { DbaccessbloodstatusService } from '../../backendServices/dbaccessbloodstatus.service';
+import { DbaccessdiplomasService } from '../../backendServices/dbaccessdiplomas.service';
 
 @Component({
   selector: 'app-editstudent',
@@ -14,6 +14,7 @@ export class EditstudentComponent implements OnInit {
 
   strTitle: string | any;
   arrData: any[] = [];
+
   arrHouses: any[] = [];
   arrBloodstatus: any[] = [];
   arrDiplomas: any[] = [];
@@ -100,10 +101,16 @@ export class EditstudentComponent implements OnInit {
   }
 
   editStudent(): void {
+    if (this.strFirstname === '' || this.strLastname === '' || this.strGender === '' || this.strHouse === '' ||
+        this.strBloodstatus === '' || this.dateBirthday === '' || this.dateOfEnrollment === '' || this.strDiploma === '') {
+      console.error('Bitte alle Felder ausfüllen!');
+    } else if (this.dateOfLeaving === '' || this.dateOfLeaving === '1000-01-01') {
+      this.dateOfLeaving = '0000-00-00';
+    }
     this.aDBAccessStudentsService.editStudent(this.intStudentId, this.strFirstname, this.strLastname, this.strGender,
       this.strHouse, this.strBloodstatus, this.dateBirthday, this.dateOfEnrollment, this.dateOfLeaving, this.strDiploma).subscribe((res: any) => {
         console.log(res);
-    }, (error: any) => {
+      }, (error: any) => {
         console.log('Fehler beim Bearbeiten des Schülers!');
       }
     );

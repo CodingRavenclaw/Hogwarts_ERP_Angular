@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DbaccessstudentsService } from '../backendServices/dbaccessstudents.service';
 import { BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
-import { EditstudentComponent } from '../editstudent/editstudent.component';
+import { AddstudentComponent } from '../modalicComponents/addstudent/addstudent.component';
+import { EditstudentComponent } from '../modalicComponents/editstudent/editstudent.component';
 
 @Component({
   selector: 'app-table',
@@ -41,12 +42,23 @@ export class TableComponent implements OnInit {
   loadStudents(): void {
     this.aDbAccessService.getStudents(this.strFirstname, this.strLastname, this.strOrderBy, this.intDataSet).subscribe((res: any) => {
       this.arrayStudents = res.data;
+      for (const aStudent of this.arrayStudents) {
+        if (aStudent.date_of_leaving === '0000-00-00') {
+          aStudent.date_of_leaving = '';
+        }
+      }
     });
   }
 
   pageChanged(event: any): void {
     this.intDataSet = (event.page - 1) * this.intDataLimit;
     this.loadStudents();
+  }
+
+  addStudent(): void {
+    this.modalRef = this.aModalService.show(AddstudentComponent, {class: 'modal-xl', initialState: {
+        strTitle: 'Schüler hinzufügen'
+      }});
   }
 
   editStudent(aStudent: any): void {

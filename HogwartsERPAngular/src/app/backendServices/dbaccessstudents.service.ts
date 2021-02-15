@@ -34,6 +34,12 @@ export class DbaccessstudentsService {
     });
   }
 
+  // TODO: Write a new function to insert new students
+  addStudent(strAFirstname: string, strALastname: string, strAGender: string, strAHouse: string,
+             strABloodstatus: string, dateABirthday: string, dateADateOfEnrollment: string, dateADateOfLeaving: string, strADiploma: string): any {
+    // Add a new student...
+  }
+
   editStudent(intAStudentId: number, strAFirstname: string, strALastname: string, strAGender: string, strAHouse: string,
               strABloodstatus: string, dateABirthday: string, dateADateOfEnrollment: string, dateADateOfLeaving: string, strADiploma: string): any {
     return this.aHttpClient.post(this.strUrlToEditStudent, {
