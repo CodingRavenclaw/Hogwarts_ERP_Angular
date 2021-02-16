@@ -31,7 +31,7 @@ export class EditstudentComponent implements OnInit {
   dateOfLeaving = '';
   strDiploma = '';
 
-  constructor(public modalRef: BsModalRef, private aDBAccessStudentsService: DbaccessstudentsService, private aDBAccessHousesService: DbaccesshousesService,
+  constructor(public aModalRef: BsModalRef, private aDBAccessStudentsService: DbaccessstudentsService, private aDBAccessHousesService: DbaccesshousesService,
               private aDBAccessBloodstatusService: DbaccessbloodstatusService, private aDBAccessDiplomasService: DbaccessdiplomasService) { }
 
   ngOnInit(): void {
@@ -92,7 +92,7 @@ export class EditstudentComponent implements OnInit {
 
   }
 
-  selected(event: any): void {
+  changeHouse(event: any): void {
     for (const aHouse of this.arrHouses) {
       if (aHouse.denotation === event.target.value) {
         this.strHouse = aHouse.abbreviation;
@@ -104,17 +104,20 @@ export class EditstudentComponent implements OnInit {
     if (this.strFirstname === '' || this.strLastname === '' || this.strGender === '' || this.strHouse === '' ||
         this.strBloodstatus === '' || this.dateBirthday === '' || this.dateOfEnrollment === '' || this.strDiploma === '') {
       console.error('Bitte alle Felder ausfüllen!');
-    } else if (this.dateOfLeaving === '' || this.dateOfLeaving === '1000-01-01') {
-      this.dateOfLeaving = '0000-00-00';
-    }
-    this.aDBAccessStudentsService.editStudent(this.intStudentId, this.strFirstname, this.strLastname, this.strGender,
-      this.strHouse, this.strBloodstatus, this.dateBirthday, this.dateOfEnrollment, this.dateOfLeaving, this.strDiploma).subscribe((res: any) => {
-        console.log(res);
-      }, (error: any) => {
-        console.log('Fehler beim Bearbeiten des Schülers!');
+    } else {
+      if (this.dateOfLeaving === '' || this.dateOfLeaving === '1000-01-01') {
+        this.dateOfLeaving = '0000-00-00';
       }
-    );
-    this.modalRef.hide();
+      this.aDBAccessStudentsService.editStudent(this.intStudentId, this.strFirstname, this.strLastname, this.strGender,
+        this.strHouse, this.strBloodstatus, this.dateBirthday, this.dateOfEnrollment, this.dateOfLeaving, this.strDiploma).subscribe(
+        (res: any) => {
+
+        }, (error: any) => {
+          console.log('Fehler beim Bearbeiten des Schülers!');
+        }
+      );
+      this.aModalRef.hide();
+    }
   }
 
 }
