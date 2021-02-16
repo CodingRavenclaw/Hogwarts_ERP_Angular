@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: hogwarts
+-- Host: localhost    Database: hogwarts
 -- ------------------------------------------------------
--- Server version	8.0.22
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -50,6 +50,7 @@ DROP TABLE IF EXISTS `diploma`;
 CREATE TABLE `diploma` (
   `abbreviation` char(4) NOT NULL,
   `denotation` varchar(48) NOT NULL,
+  `denotation_DE` varchar(48) DEFAULT NULL,
   PRIMARY KEY (`abbreviation`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -60,7 +61,7 @@ CREATE TABLE `diploma` (
 
 LOCK TABLES `diploma` WRITE;
 /*!40000 ALTER TABLE `diploma` DISABLE KEYS */;
-INSERT INTO `diploma` VALUES ('E','Expulsion'),('ND','No diploma'),('NDY','No diploma yet'),('NEWT','Nastily Exhausting Wizarding Test '),('OWL','Ordinary Wizarding Level'),('SE','Student exchange');
+INSERT INTO `diploma` VALUES ('E','Expulsion','Schulverweis'),('ND','No diploma','Kein Abschluss'),('NDY','No diploma yet','Abschluss noch nicht erreicht'),('NEWT','Nastily Exhausting Wizarding Test ','Unheimlich toller Zauberer'),('OWL','Ordinary Wizarding Level','Zauberer allgemeinen Grades'),('SE','Student exchange','Schüleraustausch');
 /*!40000 ALTER TABLE `diploma` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,4 +230,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-05 13:29:15
+-- Dump completed on 2021-02-16  0:40:05
